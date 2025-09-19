@@ -1,4 +1,4 @@
-name: CI
+name: CI (lint / typecheck / build / test)
 
 on:
   push:
@@ -13,34 +13,96 @@ on:
 permissions:
   contents: read
 
+env:
+  NODE_VERSION: '20'
+
 jobs:
-  build-and-test:
-    name: build-and-test
+  setup:
+    name: Setup (checkout + cache)
     runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.cache.outputs.cache-hit }}
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+
+      - name: Cache node_modules (npm)
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run lint
         run: npm run lint
-        # se não tiver lint, substitua por: run: echo "skip lint"
+        # Se não tiver lint, troque por: run: echo "skip lint"
 
-      - name: Type check
+  typecheck:
+    name: Type Check
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run type check
         run: npm run typecheck
-        # se não tiver typecheck, remova esta etapa ou ajuste
+        # Se não tiver typecheck (tsc --noEmit), troque por: run: echo "skip typecheck"
 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm ci
       - name: Run build
         run: npm run build
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm ci
       - name: Run tests
-        run: npm test
-        # ajuste para 'npm run test' / 'npm run test:ci' conforme seu package.json
+        run: npm run test
+        # ajuste para 'npm run test:ci' ou 'npx vitest' se for o caso
