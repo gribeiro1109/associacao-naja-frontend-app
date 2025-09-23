@@ -1,16 +1,18 @@
-import Link from 'next/link'
+// components/Header.tsx
+import Link from 'next/link';
+import styles from './header.module.css';
 
 export default function Header() {
   return (
-    <header className="bg-white shadow">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold">Associação</Link>
-        <nav className="space-x-4 text-sm">
-          <Link href="/membros">Membros</Link>
-          <Link href="/eventos">Eventos</Link>
-          <Link href="/entrar" className="font-medium text-blue-600">Entrar</Link>
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <Link href="/" className={styles.brand}>Associação</Link>
+        <nav className={styles.nav}>
+          <Link href="/membros" className={styles.link}>Membros</Link>
+          <Link href="/eventos" className={styles.link}>Eventos</Link>
+          <Link href="/entrar" className={`${styles.link} ${styles.cta}`}>Entrar</Link>
         </nav>
       </div>
     </header>
-  )
+  );
 }

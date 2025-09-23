@@ -1,9 +1,12 @@
+// components/Footer.tsx
+import styles from './footer.module.css';
+
 export default function Footer() {
   return (
-    <footer className="bg-white border-t mt-12">
-      <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-gray-600">
+    <footer className={styles.footer}>
+      <div className={styles.container}>
         © {new Date().getFullYear()} Associação — Desenvolvido por Gabriel Ribeiro
       </div>
     </footer>
-  )
+  );
 }
