@@ -1,6 +1,5 @@
-/* pages/Home.module.css */
 .main {
-  max-width: 96rem;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 2.5rem 1rem;
 }
@@ -9,60 +8,56 @@
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
-  align-items: center;
+  align-items: start;
 }
 
 @media (min-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr 360px;
-  }
+  .hero { grid-template-columns: 1fr 360px; }
 }
-
-.heroText { }
 
 .title {
   font-size: 2.25rem;
   font-weight: 800;
+  color: var(--color-primary);
   margin: 0 0 0.75rem 0;
-  color: #0f172a;
 }
 
 .subtitle {
-  color: #4b5563;
+  color: var(--color-muted);
   margin-bottom: 1rem;
 }
 
 .actions {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  display:flex; gap:0.75rem; margin-top:1rem;
 }
 
 .primary {
-  background: #2563eb;
-  color: white;
-  padding: 0.6rem 0.9rem;
-  border-radius: 0.375rem;
+  background: var(--color-primary);
+  color: #000;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .secondary {
   background: transparent;
-  color: #374151;
+  color: var(--color-text);
   padding: 0.6rem 0.9rem;
-  border-radius: 0.375rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-primary);
   text-decoration: none;
-  border: 1px solid rgba(0,0,0,0.06);
 }
 
 .card {
-  background: #f3f4f6;
-  border-radius: 0.5rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
   padding: 1rem;
+  border: var(--border);
 }
 
 .cardTitle {
+  color: var(--color-primary);
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -70,7 +65,7 @@
 .eventList {
   margin: 0;
   padding-left: 1rem;
-  color: #374151;
+  color: var(--color-text);
 }
 
 .features {
@@ -80,6 +75,7 @@
 .featuresTitle {
   font-size: 1.25rem;
   font-weight: 700;
+  color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
@@ -97,14 +93,14 @@
 }
 
 .feature {
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 0.5rem;
+  border: var(--border);
+  border-radius: var(--radius);
   padding: 1rem;
-  background: white;
+  background: var(--color-surface);
 }
 
 .featureDesc {
-  color: #6b7280;
+  color: var(--color-muted);
   margin-top: 0.5rem;
   font-size: 0.9rem;
 }

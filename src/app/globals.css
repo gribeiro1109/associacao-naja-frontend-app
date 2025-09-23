@@ -1,37 +1,26 @@
-/* Variáveis globais de tema */
+/* globals.css - Tema Associação Naja */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #2563eb;
-  --muted: #6b7280;
+  --color-primary: #FFD700;   /* amarelo ouro */
+  --color-secondary: #006400; /* verde da cobra */
+  --color-accent: #B22222;    /* vermelho destaque */
+  --color-bg: #000000;        /* fundo preto */
+  --color-surface: #111111;   /* superfícies cards */
+  --color-text: #FFFFFF;      /* texto principal branco */
+  --color-muted: #CCCCCC;     /* texto secundário */
+  --border: 1px solid rgba(255, 215, 0, 0.3); /* amarelo translúcido */
+
   --container-max: 96rem;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --radius: 0.5rem;
+  --gap: 1rem;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "Geist Mono", monospace;
-}
-
-/* Suporte a dark mode baseado no sistema */
-@media (prefers-color-scheme: dark) {
-  :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #2563eb;
-  --muted: #6b7280;
-  --container-max: 96rem;
-  --font-sans: "Inter", system-ui, sans-serif;
-}
-}
-
-/* Estilos globais */
+* { box-sizing: border-box; }
+html,body,#__next { height: 100%; }
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background-color: var(--background);
-  color: var(--foreground);
-  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
