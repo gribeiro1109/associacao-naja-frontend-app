@@ -1,14 +1,15 @@
-/* components/Footer.module.css */
 .footer {
-  background: #ffffff;
-  border-top: 1px solid rgba(0,0,0,0.04);
+  background: var(--color-bg);
+  border-top: var(--border);
   margin-top: 3rem;
+  padding: 1rem 0;
 }
 
-.container {
-  max-width: 96rem;
+.containerFooter {
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 1rem;
-  color: #6b7280; /* gray-500 */
-  font-size: 0.875rem;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  text-align: center;
 }
